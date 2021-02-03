@@ -1,0 +1,58 @@
+<div class="alert alert-danger" *ngIf="errorMsg">
+    {{errorMsg }}
+</div>
+
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Login</h4>
+							<form #userform="ngForm" *ngIf="!submitted" (submit)="onSubmit(userform)" novalidate autocomplete="off">
+								<div class="form-group">
+									<label for="email">E-Mail Address</label>
+									<input id="email" type="email" class="form-control" [(ngModel)]="loginData.email"  name="email" #email="ngModel" required>
+									<div *ngIf ="email.errors && (email.invalid && email.touched)">
+                                        <div class="alert alert-danger" *ngIf = "email.errors.required"> Email is required</div>
+                                    </div>
+								</div>
+
+								<div class="form-group">
+									<label for="password">Password
+										<a href="#" class="float-right">
+											Forgot Password?
+										</a>
+									</label>
+									<input id="password" type="password" class="form-control" [(ngModel)]="loginData.password" name="password" #password = "ngModel" required >
+                                    <div *ngIf="password.errors && (password.invalid && password.touched)">
+                                        <div class="alert alert-danger" *ngIf = "password.errors.required">Password is required </div>
+                                    </div>
+								</div>
+
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="remember" id="remember" class="custom-control-input">
+										<label for="remember" class="custom-control-label">Remember Me</label>
+									</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button [disabled]="userform.form.invalid" type="submit" class="btn btn-primary btn-block">
+										Login
+									</button>
+								</div>
+								<div class="mt-4 text-center">
+									Don't have an account? <a routerLink="/Registration">Create One</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+

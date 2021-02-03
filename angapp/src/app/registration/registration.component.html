@@ -1,0 +1,81 @@
+<div class="alert alert-danger" *ngIf="errorMsg">
+    {{errorMsg }}
+</div>
+
+<body class="my-login-page">
+	<section class="h-100">
+		<div class="container h-100">
+			<div class="row justify-content-md-center h-100">
+				<div class="card-wrapper">
+					<div class="card fat">
+						<div class="card-body">
+							<h4 class="card-title">Register</h4>
+							<form #userform="ngForm"  *ngIf="!submitted" (ngSubmit)="onSubmit(userform)" novalidate autocomplete="off">
+								<input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userModel._id">
+                                <div class="form-group">
+									<label for="name">Username</label>
+									<input id="name" type="text" class="form-control" minlength="3" maxlength="12" pattern="^[a-zA-Z ]+[a-zA-Z0-9]*" #username = "ngModel" name="username" [(ngModel)]="userModel.username" autocomplete="off" required>
+                                    <div *ngIf = "username.errors && (username.invalid && username.touched)">
+                                        <div class ="alert alert-danger" *ngIf = "username.errors.required"> Username is required</div>
+                                        <div class="alert alert-danger" *ngIf = "username.errors.pattern"> Username does not match pattern</div>
+                                        <div class="alert alert-danger" *ngIf = "username.errors.minlength"> Username should not be less than 3 letters</div>
+                                        <div class = "alert alert-danger" *ngIf = "username.errors.maxlength" > USername should have only maximum 12 letters </div>
+                                    </div>
+								</div>
+
+								<div class="form-group">
+									<label for="email">E-Mail Address</label>
+									<input id="email" type="email" class="form-control" required pattern="^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$" #email = "ngModel" [(ngModel)]="userModel.email" name="email" autocomplete="off">
+									<div *ngIf = "email.errors && (email.invalid && email.touched)">
+                                        <div class="alert alert-danger" *ngIf = "email.errors.required"> Email is required </div>
+                                        <div class="alert alert-danger" *ngIf = "email.errors.pattern"> Email doesnot match pattern</div>
+                                    </div>
+								</div>
+
+								<div class="form-group">
+									<label for="phone">Phone number</label>
+									<input id="phone" type="tel" required pattern="[0-9]{10}$" type="tel" #phone="ngModel" [(ngModel)] = "userModel.phone" name="phone" class="form-control" autocomplete="off">
+									<div *ngIf = "phone.errors && (phone.invalid && phone.touched)">
+                                        <div class="alert alert-danger" *ngIf = "phone.errors.required"> Phone number is required </div>
+                                        <div class="alert alert-danger" *ngIf = "phone.errors.pattern">phone number should be 10-digits</div>
+                                    </div>
+								</div>
+								
+								<div class="form-group">
+									<label for="password">Password</label>
+									<input id="password" type="password"  required data-eye pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$" type="password" #password="ngModel"  [(ngModel)] = "userModel.password" name="password" class="form-control" autocomplete="off">
+									<div *ngIf = "password.errors && (password.invalid && password.touched)">
+                                        <div class="alert alert-danger" *ngIf = "password.errors.required"> Password is required</div>
+                                        <div class="alert alert-danger" *ngIf ="password.errors.pattern"> PAssword doesnot match pattern</div>
+                                    </div>
+								</div>
+
+								<div class="form-group">
+									<div class="custom-checkbox custom-control">
+										<input type="checkbox" name="agree" id="agree" class="custom-control-input" required="">
+										<label for="agree" class="custom-control-label">I agree to the <a href="#">Terms and Conditions</a></label>
+										<div class="invalid-feedback">
+											You must agree with our Terms and Conditions
+										</div>
+									</div>
+								</div>
+
+								<div class="form-group m-0">
+									<button [disabled]="userform.form.invalid" type="submit" class="btn btn-primary btn-block">
+										Register
+									</button>
+								</div>
+
+								<div class="mt-4 text-center">
+									Already have an account? <a routerLink="/Login">Login</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	
+</body>

@@ -1,0 +1,21 @@
+<div class="jumbotron">
+<p>Registered details</p>
+</div>
+
+
+<div class="col s7">
+    <table class="responsive-table highlight">
+        <thread>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+        </thread>
+        <tr *ngFor="let detail of authservice.details">
+            <td>{{detail.username}}</td>
+            <td>{{detail.email}}</td>
+            <td>{{detail.phone}}</td> 
+        </tr>
+    </table>
+</div>
